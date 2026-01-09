@@ -10,7 +10,10 @@ router = APIRouter(prefix="/quiz", tags=["quiz"])
 @router.post("/")
 def create_quiz(quiz: QuizModel, user=Depends(admin_only)):
     quizzes.insert_one(quiz.dict())
-    return {"message": "Quiz created successfully"}
+    return {
+        "status": True,
+        "message": "Quiz detail fetched successfully"
+    }
 
 
 @router.get("/")
@@ -18,4 +21,8 @@ def list_quizzes(user=Depends(get_current_user)):
     data = list(quizzes.find())
     for q in data:
         q["_id"] = str(q["_id"])
-    return {"data"}
+    return {
+        "status": True,
+        "message": "Quizes fetched successfully",
+        "data": data
+    }

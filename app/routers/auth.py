@@ -28,7 +28,13 @@ def login(user: UserModel):
         "username": db_user["username"],
         "role": db_user["role"],
     })
-    return {"message": "Login successful", "token": token}
+    return {
+        "status": True,
+        "message": "Login successful",
+        "data": {
+            "access_token": token,
+        }
+    }
 
 @router.post("/logout")
 def logout(user=Depends(get_current_user)):

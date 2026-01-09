@@ -4,7 +4,7 @@ from typing import List, Optional
 class UserModel(BaseModel):
     username: str
     password: str
-    role: str
+    role: Optional[str]
 
 
 class QuestionModel(BaseModel):
