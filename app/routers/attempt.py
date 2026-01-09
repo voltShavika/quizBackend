@@ -21,4 +21,8 @@ def submit_attempt(attempt: AttemptModel, user=Depends(user_only)):
         "score": score
     })
 
-    return {"score": score}
+    return {
+        "status": True,
+        "message": "success",
+        "data": f"Total Score: {score}"
+    }

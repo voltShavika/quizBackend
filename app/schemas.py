@@ -1,6 +1,15 @@
 from pydantic import BaseModel
 from typing import List, Optional
 
+class LoginModel(BaseModel):
+    username: str
+    password: str
+
+class SignupModel(BaseModel):
+    username: str
+    password: str
+    role: str
+
 class UserModel(BaseModel):
     username: str
     password: str

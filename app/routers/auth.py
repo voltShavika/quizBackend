@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Depends
 from app.database import users
 from app.dependencies import get_current_user
-from app.schemas import UserModel
+from app.schemas import LoginModel, SignupModel
 from app.auth import hash_password, verify_password, create_token
 
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 @router.post("/signup")
-def signup(user: UserModel):
+def signup(user: SignupModel):
     if users.find_one({"username": user.username}):
         return {"message": "Username already exists"}
     users.insert_one({
@@ -16,10 +16,13 @@ def signup(user: UserModel):
         "password": hash_password(user.password),
         "role": user.role,
     })
-    return {"message": "Signup successful"}
+    return {
+        "status": True,
+        "message": "Signup successful"
+    }
 
 @router.post("/login")
-def login(user: UserModel):
+def login(user: LoginModel):
     db_user = users.find_one({"username": user.username})
     if not db_user or not verify_password(user.password, db_user["password"]):
         return {"message": "Invalid credentials"}
@@ -33,6 +36,7 @@ def login(user: UserModel):
         "message": "Login successful",
         "data": {
             "access_token": token,
+            "role": db_user["role"]
         }
     }
 
