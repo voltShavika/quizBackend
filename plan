@@ -1,0 +1,40 @@
+Functionalities
+1. login
+2. signup
+3. logout
+4. Single login will be user and admin
+5. Admin can create quiz
+6. User will see quizes on dashboard and attemp it
+7. Leaderboard
+Apis
+Routers
+Models
+1. User
+2. Quiz
+3. Question
+4. Attempt
+
+
+Database
+Mongodb atlas
+
+-- Frontend --
+Pages
+1. Login page -> same login for both user
+2. Signup page
+3. Home page according to user type
+4. CreateQuiz
+5. AttemptQuiz
+6. Leaderboard
+
+Project Structure
+- app/
+    main.py
+    routers/
+        - auth
+        - quiz
+        - attempt
+        - leaderboard
+    database.py
+    models.py
+requirements.txt
