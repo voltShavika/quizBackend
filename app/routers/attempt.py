@@ -24,5 +24,8 @@ def submit_attempt(attempt: AttemptModel, user=Depends(user_only)):
     return {
         "status": True,
         "message": "success",
-        "data": f"Total Score: {score}"
+        "data": {
+            "score": score,
+            "total_questions": len(quiz["questions"]),
+        }
     }
